@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] float jumpHeight;
 
+    bool isAlive = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,14 +23,25 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        if (!isAlive) { return; }
+        Die();
     }
 
     void OnJump(InputValue value)
     {
+        if (!isAlive) { return; }
         if (value.isPressed)
         {
             myRigidbody.velocity = Vector2.up * jumpHeight;
+        }
+    }
+
+    void Die()
+    {
+        if (myCollider.IsTouchingLayers(LayerMask.GetMask("Pipe")))
+        {
+            isAlive = false;
+            FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
 }
