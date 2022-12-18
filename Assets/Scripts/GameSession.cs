@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour
@@ -11,6 +12,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] int score = 0;
 
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] GameObject gameOverScreen;
 
     void Awake()
     {
@@ -58,10 +60,15 @@ public class GameSession : MonoBehaviour
         // livesText.text = playerLives.ToString();
     }
 
-    void ResetGameSession()
+    public void ResetGameSession()
     {
         //FindObjectOfType<ScenePersist>().ResetScenePersist();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Destroy(gameObject);
+    }
+
+    public void gameOver()
+    {
+        gameOverScreen.SetActive(true);
     }
 }

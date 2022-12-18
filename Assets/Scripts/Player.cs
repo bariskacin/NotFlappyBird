@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     void OnJump(InputValue value)
     {
         if (!isAlive) { return; }
+        Die();
         if (value.isPressed)
         {
             myRigidbody.velocity = Vector2.up * jumpHeight;
@@ -42,6 +43,13 @@ public class Player : MonoBehaviour
         {
             isAlive = false;
             FindObjectOfType<GameSession>().ProcessPlayerDeath();
+            FindObjectOfType<GameSession>().gameOver();
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        FindObjectOfType<GameSession>().gameOver();
+        isAlive = false;
     }
 }
