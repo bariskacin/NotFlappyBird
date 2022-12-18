@@ -178,7 +178,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.015633821}
-  m_Size: {x: 0.5, y: 2.8127294}
+  m_Size: {x: 0.1971817, y: 2.8127294}
   m_Direction: 0
 --- !u!114 &93396782986015533
 MonoBehaviour:
@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aad82aad2d2f4820a84ef3b389d3b3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsSFX: {fileID: 0}
+  pointsSFX: {fileID: 8300000, guid: 5de502c6b0329f14ab2126102843b383, type: 3}
   pointsForPlayer: 1
 --- !u!1 &3599025541217983160
 GameObject:
