@@ -13,6 +13,11 @@ public class GameSession : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] GameObject gameOverScreen;
+    [SerializeField] GameObject scoreObject;
+
+    [SerializeField] private TMP_Text highScoreText;
+    public const string HighScoreKey = "HighScore";
+
 
     void Awake()
     {
@@ -32,6 +37,10 @@ public class GameSession : MonoBehaviour
     void Start()
     {
         scoreText.text = score.ToString();
+
+        int highScore = PlayerPrefs.GetInt(HighScoreKey, 0);
+
+        highScoreText.text = $"High Score: {highScore}";
     }
 
     public void ProcessPlayerDeath()
@@ -52,17 +61,26 @@ public class GameSession : MonoBehaviour
         scoreText.text = score.ToString();
     }
 
+    private void OnDestroy()
+    {
+        int currentHighScore = PlayerPrefs.GetInt(HighScoreKey, 0);
+
+        if (score > currentHighScore)
+        {
+            PlayerPrefs.SetInt(HighScoreKey, Mathf.FloorToInt(score));
+        }
+    }
+
+
     void TakeLife()
     {
         playerLives--;
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
-        // livesText.text = playerLives.ToString();
     }
 
     public void ResetGameSession()
     {
-        //FindObjectOfType<ScenePersist>().ResetScenePersist();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Destroy(gameObject);
     }
@@ -70,5 +88,6 @@ public class GameSession : MonoBehaviour
     public void gameOver()
     {
         gameOverScreen.SetActive(true);
+        scoreObject.SetActive(false);
     }
 }

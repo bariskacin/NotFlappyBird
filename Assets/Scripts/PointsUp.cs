@@ -16,7 +16,6 @@ public class PointsUp : MonoBehaviour
             wasPassed = true;
             FindObjectOfType<GameSession>().AddToScore(pointsForPlayer);
             AudioSource.PlayClipAtPoint(pointsSFX, Camera.main.transform.position);
-            //Destroy(gameObject);
         } 
     }
 }
